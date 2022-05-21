@@ -1,0 +1,20 @@
+---
+- name: useradd 
+  shell: |
+      cmd:
+        df -h
+        cat /etc/hostname
+- name: useradd name
+  user:
+        name: alilab
+        group: alilab
+        creathome: yes
+        home: /home/alilab
+        password: qoros123
+        shell: /bin/bash
+- name: alilab user
+  template: 
+      src: test.sh
+      dest: /home/alilab
+      mode: '0755'
+
