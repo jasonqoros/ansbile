@@ -4,6 +4,8 @@
       cmd:
         df -h
         cat /etc/hostname
+- name: group 
+  group: name=alilab
 - name: useradd name
   user:
         name: alilab
