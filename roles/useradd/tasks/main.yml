@@ -1,22 +1,26 @@
 ---
-- name: useradd 
-  shell: |
-      cmd:
-        df -h
-        cat /etc/hostname
-- name: group 
+- name: group
   group: name=alilab
-- name: useradd name
+- name: Add the user
   user:
-        name: alilab
-        group: alilab
-        creathome: yes
-        home: /home/alilab
-        password: qoros123
-        shell: /bin/bash
+    name: alilab
+    groups: alilab
+    createhome: yes
+    home: /home/alilab
+    password: alilab
+    shell: /bin/bash
+- name: change passwd
+  #shell: "echo 'alilab:ailab' | sudo chpasswd"
+  shell: "echo alilab | passwd --stdin alilab"
+- name : docker group
+  shell: | 
+     cmd:
+     usermod -aG docker alilab
 - name: alilab user
   template: 
       src: test.sh
       dest: /home/alilab
+      owner: root
+      group: root
       mode: '0755'
 
